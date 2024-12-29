@@ -1,0 +1,52 @@
+<div class="root" [ngStyle]="config.style">
+  <mat-card class="mat-elevation-z24">
+    <mat-card-content>
+      <h1>{{ title || config.title }}</h1>
+      <form [formGroup]="form" (submit)="$event.stopPropagation()">
+        <div [class.disabled]="isPending">
+          <mat-form-field *ngFor="let control of controls">
+            <mat-label>{{ capitalize(control) }}</mat-label>
+            <input
+              *ngIf="type(control) === 'text' || type(control) === 'password'"
+              matInput
+              [type]="type(control)"
+              [formControlName]="control"
+              placeholder="Enter {{ control }}"
+            />
+            <mat-select
+              *ngIf="
+                type(control) === 'select' || type(control) === 'multi-select'
+              "
+              [formControlName]="control"
+              placeholder="Select {{ control }}"
+              [multiple]="type(control) === 'multi-select'"
+              [compareWith]="compareOptions"
+            >
+              <mat-option
+                *ngFor="let option of options(control) | async"
+                [value]="
+                  optionValue(control) ? option[optionValue(control)] : option
+                "
+                >{{
+                  optionKey(control) ? option[optionKey(control)] : option
+                }}</mat-option
+              >
+            </mat-select>
+            <mat-error> {{ capitalize(control) }} is required! </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="center">
+          <button
+            *ngIf="!isPending"
+            mat-raised-button
+            color="primary"
+            (click)="handleSubmit()"
+          >
+            Submit
+          </button>
+          <app-spinner *ngIf="isPending"></app-spinner>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
