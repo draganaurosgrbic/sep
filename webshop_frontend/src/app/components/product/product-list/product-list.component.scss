@@ -1,0 +1,35 @@
+::ng-deep .mat-tab-label-content {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.add-product {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px;
+  margin-top: 20px;
+}
+
+.add-product button {
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 15px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  font-size: 30px;
+}

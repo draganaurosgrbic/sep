@@ -1,0 +1,11 @@
+<div class="orders">
+  <app-product-item *ngFor="let order of orders" [product]="order.product">
+    <div class="row"><b>Quantity: </b>{{ order.quantity }}</div>
+    <div class="row">
+      <b>Date: </b>{{ order.date | date: "dd/MM/yyyy HH:mm:ss" }}
+    </div>
+    <div class="row"><b>Status: </b>{{ order.status }}</div>
+  </app-product-item>
+</div>
+
+<div class="empty" *ngIf="!orders?.length">NO ORDERS</div>

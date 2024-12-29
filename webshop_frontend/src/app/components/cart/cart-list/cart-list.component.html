@@ -1,0 +1,12 @@
+<div class="cart">
+  <app-product-item
+    *ngFor="let item of cart"
+    [product]="item.product"
+    [actions]="'remove_from_cart'"
+    (refreshProducts)="readCart()"
+  >
+    <div class="row"><b>Quantity: </b>{{ item.quantity }}</div>
+  </app-product-item>
+</div>
+
+<div class="empty" *ngIf="!cart?.length">CART EMPTY</div>

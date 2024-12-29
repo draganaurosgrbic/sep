@@ -1,0 +1,77 @@
+<div class="root mat-elevation-z24">
+  <mat-card>
+    <mat-card-content>
+      <h2>{{ product.name }}</h2>
+
+      <img [src]="product.imageLocation" />
+
+      <div class="row"><b>Category: </b>{{ product.category }}</div>
+      <div class="row"><b>Description: </b>{{ product.description }}</div>
+      <div class="row">
+        <b>Price: </b>{{ product.price }} {{ product.currency }}
+      </div>
+      <ng-content></ng-content>
+
+      <span class="actions">
+        <span>
+          <button
+            *ngIf="actions === 'crud'"
+            mat-button
+            color="primary"
+            [routerLink]="edit(product)"
+          >
+            <mat-icon>edit</mat-icon>Edit
+          </button>
+          <span *ngIf="actions === 'remove_from_cart'">
+            <button
+              *ngIf="cartPendingId !== product.id"
+              mat-button
+              color="accent"
+              (click)="remove_from_cart(product)"
+            >
+              <mat-icon>remove_shopping_cart</mat-icon>Remove from cart
+            </button>
+
+            <app-spinner *ngIf="cartPendingId === product.id"></app-spinner>
+          </span>
+        </span>
+
+        <span>
+          <button
+            *ngIf="actions === 'crud'"
+            mat-button
+            color="warn"
+            (click)="delete(product)"
+          >
+            <mat-icon>delete</mat-icon>Delete
+          </button>
+
+          <span *ngIf="actions === 'add_to_cart'">
+            <button
+              *ngIf="cartPendingId !== product.id"
+              mat-button
+              color="accent"
+              (click)="addToCart(product)"
+            >
+              <mat-icon>add_shopping_cart</mat-icon>Add to cart
+            </button>
+
+            <app-spinner *ngIf="cartPendingId === product.id"></app-spinner>
+          </span>
+
+          <span *ngIf="actions === 'remove_from_cart'">
+            <button
+              *ngIf="orderPendingId !== product.id"
+              mat-button
+              color="primary"
+              (click)="order(product)"
+            >
+              <mat-icon>add_circle_outline</mat-icon>Order Cart
+            </button>
+            <app-spinner *ngIf="orderPendingId === product.id"></app-spinner>
+          </span>
+        </span>
+      </span>
+    </mat-card-content>
+  </mat-card>
+</div>
